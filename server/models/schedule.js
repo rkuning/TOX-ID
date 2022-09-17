@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      schedule.belongsTo(models.studio, {
+        as: "schedule's studio",
+        foreignKey: "studioId",
+      });
     }
   }
   schedule.init(
@@ -26,14 +30,6 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: {
             message: "studioId required!",
-          },
-        },
-      },
-      providerId: {
-        type: DataTypes.INTEGER,
-        validate: {
-          notEmpty: {
-            message: "providerId required!",
           },
         },
       },

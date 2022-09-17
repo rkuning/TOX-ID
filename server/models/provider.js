@@ -21,6 +21,12 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
+      provider.hasMany(models.movie_in_provider, {
+        as: "movie's provider",
+        foreignKey: "providerId",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
     }
   }
   provider.init(

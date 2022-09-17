@@ -9,6 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      movie_in_provider.belongsTo(models.provider, {
+        as: "movie's provider",
+        foreignKey: "providerId",
+      });
+      movie_in_provider.belongsTo(models.movie, {
+        as: "provider's movie",
+        foreignKey: "movieId",
+      });
     }
   }
   movie_in_provider.init(

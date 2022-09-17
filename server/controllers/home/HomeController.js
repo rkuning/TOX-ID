@@ -85,8 +85,8 @@ class HomeController {
 
   static async login(req, res) {
     try {
-      const { phone, password } = req.body;
-      const valUser = await user.findOne({ where: { phone } });
+      const { email, password } = req.body;
+      const valUser = await user.findOne({ where: { email } });
       if (valUser) {
         if (decryptPw(password, valUser.password)) {
           if (valUser.status === "active") {
@@ -107,12 +107,12 @@ class HomeController {
 
   static async register(req, res) {
     try {
-      const { name, phone, password } = req.body;
-      const valPhone = await user.findOne({ where: { phone } });
-      if (valPhone) {
-        res.status(302).json({ msg: `Phone already registered!` });
+      const { name, email, password } = req.body;
+      const valEmail = await user.findOne({ where: { email } });
+      if (valEmail) {
+        res.status(302).json({ msg: `Email already registered!` });
       } else {
-        const dataUser = await user.create({ name, phone, password });
+        const dataUser = await user.create({ name, email, password });
         await patty.create({ userId: dataUser.id });
         res.status(201).json({ dataUser, msg: `Create successfully!` });
       }

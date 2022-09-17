@@ -9,6 +9,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      studio.belongsTo(models.provider, {
+        as: "studio's provider",
+        foreignKey: "providerId",
+      });
+      studio.hasMany(models.schedule, {
+        as: "schedule's studio",
+        foreignKey: "studioId",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
+      studio.hasMany(models.seat, {
+        as: "seat's studio",
+        foreignKey: "studioId",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
     }
   }
   studio.init(

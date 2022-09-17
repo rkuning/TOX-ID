@@ -35,6 +35,11 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
+      hooks: {
+        beforeCreate: (patty, options) => {
+          patty.balance = 0;
+        },
+      },
       sequelize,
       timestamps: false,
       modelName: "patty",
